@@ -1,35 +1,41 @@
 from player import HumanPlayer,RandomComputerPlayer
 import time
+import math
 
-class TicTacToe:
+class TicTacToe():
     def __init__(self):
-        self.board = [' ' for _ in range(9)] # we will use a single board to rep 3x3 board
+        self.board = self.make_board()
         self.current_winner = None # keep track of the winner
 
+    @staticmethod
+
+    def make_board():
+        return [' ' for _ in range(9)] # we will use a single board to rep 3x3 board
+
+
     def print_board(self):
-        # just get the rows first
-        for row in [self.board[i*3:(i+1)*3] for i in range(3)]:
-            print('|' + '|'.join(row)+ '|')
+        for row in [self.board[i*3:(i+1) * 3] for i in range(3)]:
+            print('| ' + ' | '.join(row) + ' |')
 
     @staticmethod
 
     def print_board_nums():
         number_board = [[str(i) for i in range(j*3,(j+1)*3)] for j in range(3)]
         for row in number_board:
-            print('|' + '|'.join(row)+ '|')
+            print('| ' + ' | '.join(row) + ' |')
 
     def available_moves(self):
-        return [i for i,spot in enumerate(self.board) if spot == ' ']
+        return [i for i,spot in enumerate(self.board) if spot == " "]
 
     def empty_squares(self):
-        return ' ' in self.board
+        return " " in self.board
     
     def num_empty_squares(self):
         return self.board.count(' ')
 
     def make_move(self,square,letter):
         if self.board[square] == ' ':
-            self.board[square] == letter
+            self.board[square] = letter
             if self.winner(square,letter):
                 self.current_winner = letter
             return True
@@ -37,14 +43,14 @@ class TicTacToe:
 
     def winner(self, square,letter):
         #check the row
-        row_ind = square //3
+        row_ind = math.floor(square / 3)
         row = self.board[row_ind*3 : (row_ind+1)*3]
         if all([spot == letter for spot in row]):
             return True
 
         #check the column
         col_ind = square % 3
-        column = [self.board[col_ind + i + 3] for i in range(3)]
+        column = [self.board[col_ind + i * 3] for i in range(3)]
         if all([spot == letter for spot in column]):
             return True
 
@@ -64,39 +70,34 @@ class TicTacToe:
 
 
 def play(game, x_player, o_player, print_game=True):
-    #returns the winner of the game - None if it is a fraw
+
     if print_game:
         game.print_board_nums()
-    
-    letter = 'X'  #starting letter
-    # iterate while the game still has empty squares
 
+    letter = 'X'
     while game.empty_squares():
         if letter == 'O':
             square = o_player.get_move(game)
         else:
             square = x_player.get_move(game)
+        if game.make_move(square, letter):
 
-        if game.make_move(square,letter):
             if print_game:
-                print(letter + f' makes a move to square {square}')
+                print(letter + ' makes a move to square {}'.format(square))
                 game.print_board()
-                print('') # it is just an empty line
-            
+                print('')
 
             if game.current_winner:
                 if print_game:
                     print(letter + ' wins!')
-                return letter
+                return letter  # ends the loop and exits the game
+            letter = 'O' if letter == 'X' else 'X'  # switches player
 
-            #after we made our move, we need to alternate the letters
-            letter = 'O' if letter == 'X' else 'X'
-        
-        #tiny break
-        time.sleep(0.8)
+        time.sleep(.8)
 
     if print_game:
-        print('It is a tie!')
+        print('It\'s a tie!')
+
 
 if __name__ == '__main__':
     x_player = HumanPlayer('X')
