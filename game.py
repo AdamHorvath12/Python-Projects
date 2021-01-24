@@ -100,7 +100,7 @@ def play(game, x_player, o_player, print_game=True):
 
 
 if __name__ == '__main__':
-    x_player = HumanPlayer('X')
+    x_player = RandomComputerPlayer('X')
     o_player = GeniousComputerPlayer('O')
     t = TicTacToe()
     play(t,x_player,o_player,print_game=True)
