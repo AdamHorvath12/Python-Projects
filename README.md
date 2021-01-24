@@ -8,3 +8,5 @@ Creating projects using Python
 ### 3. Project - Tic Tac Toe game with Unbeatable computer player ###
 
 ### 4. Project - Hangman game ###
+
+### 5. Project - A * Pathfinding Visualization ###
