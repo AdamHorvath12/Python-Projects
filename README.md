@@ -10,3 +10,5 @@ Creating projects using Python
 ### 4. Project - Hangman game ###
 
 ### 5. Project - A * Pathfinding Visualization ###
+
+### 6. Project - Balck Jack Card game ###
