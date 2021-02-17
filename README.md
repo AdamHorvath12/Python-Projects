@@ -14,3 +14,5 @@ Creating projects using Python
 ### 6. Project - Balck Jack Card game ### file: blackjack.py
 
 ### 7. Project - Snake game ### file: snake.py
+
+### 8. Project - Scrape Amazon price ### file: scraper.py
